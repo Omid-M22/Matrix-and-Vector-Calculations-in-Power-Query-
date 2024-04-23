@@ -4,28 +4,39 @@ Power Query supports a wide range of data types and calculations, but matrix and
 
 Note: In all the codes below, matrices are represented as tables, and vectors are represented as lists.
 
-VectorAddConstant: Adds or subtracts a specific value from all elements in a vector.
+## VectorAddConstant:
+Adds or subtracts a specific value from all elements in a vector.
+
 ```powerquery-m
 (Vector as list ,Constant as number ) as list=> List.Transform(Vector, each _+Constant)
 ```
 
-VectorMultiplyConstant: Multiplies or divides all elements in a vector by a specific value.
+## VectorMultiplyConstant: 
+Multiplies or divides all elements in a vector by a specific value.
+
 ```powerquery-m
 (Vector as list ,Constant as number ) as list=> List.Transform(Vector, each _*Constant)
 ```
-SumProduct: Similar to Excel's SUMPRODUCT function.
+
+## SumProduct:
+Similar to Excel's SUMPRODUCT function.
+
 ```powerquery-m
 (Vector1 as list, Vector2 as list) as number =>
   List.Sum(List.Transform(List.Positions(Vector1), each Vector1{_} * Vector2{_}))
 ```
 
-MatrixZeros: This creates an n-dimensional matrix where all values are zero.
+## MatrixZeros:
+This creates an n-dimensional matrix where all values are zero.
+
 ```powerquery-m
 (Constant as number ) as table => Table.FromColumns(List.Repeat({List.Repeat({0},Constant)},Constant))
 ```
 
-MatrixEye: Creates an n-dimensional diagonal matrix.
-Version 1:
+## MatrixEye:
+Creates an n-dimensional diagonal matrix.
+
+####  Version 1:
 ```powerquery-m
 (Constant as number) as table =>
   Table.FromColumns(
@@ -39,7 +50,7 @@ Version 1:
   )
 ```
 
-Version 2:
+####  Version 2:
 ```powerquery-m
 (Constant as number) as table =>
   Table.FromColumns(
@@ -49,7 +60,10 @@ Version 2:
     )
   )
 ```
-MutrixMultiply: Like MMult in Excel for multiplying two matrix
+
+
+## MutrixMultiply: 
+Like MMult in Excel for multiplying two matrix
 ```powerquery-m
 (MatrixA as table, MatrixB as table) as table =>
   let
@@ -69,7 +83,8 @@ MutrixMultiply: Like MMult in Excel for multiplying two matrix
 ```
 
 
-MatrixDeterminant: Calculates the determinant of a matrix.
+## MatrixDeterminant
+Calculates the determinant of a matrix.
 ```powerquery-m
 (Matrix) =>
   let
